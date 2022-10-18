@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        td{
+        td {
             border: solid 1px;
             border-collapse: collapse;
             padding: 4px;
         }
     </style>
 </head>
+
 <body>
     <table>
 
@@ -22,9 +24,9 @@
     let size, values;
     let tablePop = (values) => {
         const table = document.querySelector("table");
-        for(let rowidx in values){
+        for (let rowidx in values) {
             let tr = document.createElement("tr");
-            for(let colIdx in values[rowidx]){
+            for (let colIdx in values[rowidx]) {
                 let td = document.createElement("td");
                 td.innerHTML = values[rowidx][colIdx];
                 tr.appendChild(td);
@@ -32,18 +34,25 @@
             table.appendChild(tr);
         }
     }
-    let loadJson = () =>{
+    let loadJson = (source_path) => {
         const xmlHTTP = new XMLHttpRequest();
-        xmlHTTP.onload = function(){
+        xmlHTTP.onload = function () {
             let output = JSON.parse(this.responseText)[0];
             console.log(output);
             size = output.size;
             values = output.values;
             tablePop(values);
         }
-        xmlHTTP.open("GET","./source.json",true);
+        xmlHTTP.open("GET", source_path, true);
         xmlHTTP.send();
     }
-    loadJson();
+    let source_path = './data/source.json'
+    loadJson(source_path);
 </script>
+<script src="./js/row_validation.js"></script>
+<script src="./js/col_validation.js"></script>
+<script src="./js/box_validation.js"></script>
+<script src="./js/design.js"></script>
+<script src="./js/index.js"></script>
+
 </html>
