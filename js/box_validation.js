@@ -43,33 +43,33 @@ function boxValidation(size, values) {
             }
         }
         // reduce dimension
-        var box = [];
+        var output = [];
         for (var idx = 0; idx < arrayBox.length; idx++) {
             var singleBox = [];
             for (var row = 0; row < arrayBox[idx].length; row++) {
                 singleBox = singleBox.concat(arrayBox[idx][row]);
             }
-            box.push(singleBox);
+            output.push(singleBox);
         }
-        return box;
+        return output;
     }
 
     // validate array (detect duplicates)
-    function validater(array) {
+    function validater(boxArray) {
         var validateArray = [];
-        for (var i = 0; i < array.length; i++) {
+        for (var i = 0; i < boxArray.length; i++) {
             var validateMap = new Map();
             var rowArray = [];
-            for (var j = 0; j < array[i].length; j++) {
-                if (validateMap.has(array[i][j])) {
+            for (var j = 0; j < boxArray[i].length; j++) {
+                if (validateMap.has(boxArray[i][j])) {
                     rowArray.push(true);
-                    var col = validateMap.get(array[i][j])[1][0];
+                    var col = validateMap.get(boxArray[i][j])[1][0];
                     // update duplicated value
                     rowArray[col] = true;
                 } else {
                     rowArray.push(false);
                     // save position
-                    validateMap.set(array[i][j], [[i], [j]]);
+                    validateMap.set(boxArray[i][j], [[i], [j]]);
                 }
             }
             validateArray.push(rowArray);
@@ -86,8 +86,8 @@ function boxValidation(size, values) {
     // console.log(validateArray);
 
     output = arrayToBox(size, validateArray, boxSize);
-    console.log("boxValidation output");
-    console.log(output);
+    // console.log("boxValidation output");
+    // console.log(output);
 
     return output;
 }
