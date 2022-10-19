@@ -26,26 +26,28 @@ function boxValidation(size, values) {
 
     // convert array to box
     function arrayToBox(size, validateArray, boxSize) {
-        var boxArray = [];
+        var arrayBox = [];
+        // init arrayBox
         for (var idx = 0; idx < size; idx++) {
-            boxArray.push([]);
+            arrayBox.push([]);
         }
-        var dimension = 0;
+        // set row index for revert
+        var rowIndex = 0;
         for (var idx = 0; idx < size; idx++) {
             for (var row = 0; row < boxSize; row++) {
-                boxArray[row + (dimension * boxSize)].push(validateArray[idx].slice(boxSize * row, boxSize * (row + 1)));
+                arrayBox[row + (rowIndex * boxSize)].push(validateArray[idx].slice(boxSize * row, boxSize * (row + 1)));
             }
-            dimension++;
-            if (dimension == boxSize) {
-                dimension = 0;
+            rowIndex++;
+            if (rowIndex == boxSize) {
+                rowIndex = 0;
             }
         }
         // reduce dimension
         var box = [];
-        for (var idx = 0; idx < boxArray.length; idx++) {
+        for (var idx = 0; idx < arrayBox.length; idx++) {
             var singleBox = [];
-            for (var row = 0; row < boxArray[idx].length; row++) {
-                singleBox = singleBox.concat(boxArray[idx][row]);
+            for (var row = 0; row < arrayBox[idx].length; row++) {
+                singleBox = singleBox.concat(arrayBox[idx][row]);
             }
             box.push(singleBox);
         }
@@ -62,9 +64,11 @@ function boxValidation(size, values) {
                 if (validateMap.has(array[i][j])) {
                     rowArray.push(true);
                     var col = validateMap.get(array[i][j])[1][0];
+                    // update duplicated value
                     rowArray[col] = true;
                 } else {
                     rowArray.push(false);
+                    // save position
                     validateMap.set(array[i][j], [[i], [j]]);
                 }
             }
@@ -74,15 +78,15 @@ function boxValidation(size, values) {
     }
 
     boxArray = boxToArray(size, values, boxSize);
-    console.log("boxArray");
-    console.log(boxArray);
+    // console.log("boxArray");
+    // console.log(boxArray);
 
     validateArray = validater(boxArray);
-    console.log("validateArray");
-    console.log(validateArray);
+    // console.log("validateArray");
+    // console.log(validateArray);
 
     output = arrayToBox(size, validateArray, boxSize);
-    console.log("output");
+    console.log("boxValidation output");
     console.log(output);
 
     return output;
