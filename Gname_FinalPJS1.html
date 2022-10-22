@@ -1,39 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+    src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <title>Document</title>
-    <style>
-        td {
-            border: solid 1px;
-            border-collapse: collapse;
-            padding: 4px;
-        }
-    </style>
+    <script src="./js/box_validation.js"></script>
+    <script src="./js/row_validation.js"></script>
+    <script src="./js/col_validation.js"></script>
+    <script src="./js/design.js"></script>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <table>
-
-    </table>
+    <main>
+        <p>If you're smart, you'll solve Sudoku easily, right?</p>
+        <h1>
+            javaScript Final-Project Sudoku
+        </h1>
+        <br/>
+        <div class="sel">
+            <select name="" id="type">
+                <option value="source_4x4">Correct 4 X 4</option>
+                <option value="source_4x4_invaild">4 X 4</option>
+                <option value="source">Correct 9 X 9</option>
+                <option value="source_invalid">9 X 9</option>
+                <option value="source_16x16_invalid">16 X 16</option>
+            </select>
+            <button type="button" class=
+            "selbtn" onclick="selectsudoku()">select</button>
+        </div>
+        <br/>
+        <div class="table">
+            <table>
+            </table>
+        </div>
+        <br/>
+        <br/>
+        <div>
+            <button type="button" class=
+            "valbtn" onclick="validation()"><i class="fa-solid fa-power-off"></i>  Validate the Sudoku</button>
+            <button type="button" class=
+            "rebtn" onclick="resetval()"><i class="fa-solid fa-power-off"></i> Reset</button>
+            <button type="button" onclick="testtest()">GET</button>
+        </div>
+        <div class="resultmessage">
+            Let's check if your Sudoku is right.
+        </div>
+    </main>
+    <footer>
+        <span>
+            Tamwood Web development javaScript Fianl Project | Presented by Tyler, Yusuke, Taka, Nak
+        </span>
+    </footer>
 </body>
 <script>
     let size, values;
-    let tablePop = (values) => {
-        const table = document.querySelector("table");
-        for (let rowidx in values) {
-            let tr = document.createElement("tr");
-            for (let colIdx in values[rowidx]) {
-                let td = document.createElement("td");
-                td.innerHTML = values[rowidx][colIdx];
-                tr.appendChild(td);
+    let tablePop = (values, size, boxresult) => {
+        const tabled = document.querySelector("table");
+        tabled.parentNode.removeChild(tabled)
+        const table = document.querySelector(".table");
+        let tablemake = document.createElement("table")
+        if(size == 4){
+            for (let rowidx in values) {
+                let tr = document.createElement("tr");
+                for (let colIdx in values[rowidx]) {
+                    let td = document.createElement("input");
+                    td.value = values[rowidx][colIdx];
+                    td.className = `sudoku ${rowidx}_${colIdx}`;
+                    if(
+                        colIdx < "2" && rowidx < "2" ||
+                        colIdx > "1" && rowidx > "1"
+                    ){
+                        td.classList.add('basic')
+                    }
+                    tr.appendChild(td);
+                }
+                tablemake.appendChild(tr);
+                table.appendChild(tablemake);
             }
-            table.appendChild(tr);
+        }else if(size == 9){
+            for (let rowidx in values) {
+                let tr = document.createElement("tr");
+                for (let colIdx in values[rowidx]) {
+                    let td = document.createElement("input");
+                    td.value = values[rowidx][colIdx];
+                    td.className = `sudoku ${rowidx}_${colIdx}`;
+                    if(
+                        colIdx < "3" && rowidx < "3" ||
+                        colIdx > "5" && rowidx > "5" ||
+                        colIdx > "5" && rowidx < "3" ||
+                        colIdx < "3" && rowidx > "5" ||
+                        (rowidx > 2 && rowidx < 6 && colIdx > 2 && colIdx < 6)
+                    ){
+                        td.classList.add('basic')
+                    }
+                    tr.appendChild(td);
+                }
+                tablemake.appendChild(tr);
+                table.appendChild(tablemake);
+            }
+        }else if(size == 16){
+            for (let rowidx in values) {
+                let tr = document.createElement("tr");
+                for (let colIdx in values[rowidx]) {
+                    let td = document.createElement("input");
+                    td.value = values[rowidx][colIdx];
+                    td.className = `sudoku ${rowidx}_${colIdx}`;
+                    if(
+                        (colIdx == "0" || colIdx == "1" || colIdx == "2" || colIdx == "3") & (rowidx == "0" || rowidx == "1" || rowidx == "2" || rowidx == "3") 
+                        ||
+                        (colIdx == "8" || colIdx == "9" || colIdx == "10" || colIdx == "11") & (rowidx == "0" || rowidx == "1" || rowidx == "2" || rowidx == "3") 
+                        ||
+                        (colIdx == "4" || colIdx == "5" || colIdx == "6" || colIdx == "7") & (rowidx == "4" || rowidx == "5" || rowidx == "6" || rowidx == "7") 
+                        ||
+                        (colIdx == "12" || colIdx == "13" || colIdx == "14" || colIdx == "15") & (rowidx == "4" || rowidx == "5" || rowidx == "6" || rowidx == "7")
+                        ||
+                        (colIdx == "0" || colIdx == "1" || colIdx == "2" || colIdx == "3") & (rowidx == "8" || rowidx == "9" || rowidx == "10" || rowidx == "11") 
+                        ||
+                        (colIdx == "8" || colIdx == "9" || colIdx == "10" || colIdx == "11") & (rowidx == "8" || rowidx == "9" || rowidx == "10" || rowidx == "11")
+                        ||
+                        (colIdx == "4" || colIdx == "5" || colIdx == "6" || colIdx == "7") & (rowidx == "12" || rowidx == "13" || rowidx == "14" || rowidx == "15") 
+                        ||
+                        (colIdx == "12" || colIdx == "13" || colIdx == "14" || colIdx == "15") & (rowidx == "12" || rowidx == "13" || rowidx == "14" || rowidx == "15") 
+                    ){
+                        td.classList.add('basic')
+                    }
+                    tr.appendChild(td);
+                }
+                tablemake.appendChild(tr);
+                table.appendChild(tablemake);
+            }
         }
-    }
+        }
+
+    let boxresult = {};
+    let colresult = {};
     let loadJson = (source_path) => {
         const xmlHTTP = new XMLHttpRequest();
         xmlHTTP.onload = function () {
@@ -41,22 +149,57 @@
             console.log(output);
             size = output.size;
             values = output.values;
-            tablePop(values);
+            console.log(size)
+            boxresult = boxValidation(size, values);
+            tablePop(values, size, boxresult);
         }
+        
+        
         xmlHTTP.open("GET", source_path, true);
         xmlHTTP.send();
     }
-    var source_path = './data/source.json'
-    var source_path = './data/source_invalid.json'
+
+    function validation(){
+        chageCh(boxresult);
+    }
+
+    function resetval(){
+        $("input").removeClass("red");
+        console.log($("input"));
+        let message = document.getElementsByClassName("resultmessage")[0];
+        message.innerText = `Let's check if your Sudoku is right.`
+    }
+
+    console.log(boxresult);
+
+    
+    let source_path;
+    function selectsudoku(){        
+        let type = document.getElementById("type").value
+        source_path = `./data/${type}.json`;
+        console.log(source_path)
+        loadJson(source_path);
+    }
+
+
+    // var source_path = './data/source.json'
     // var source_path = './data/source_4x4.json'
     // var source_path = './data/source_4x4_invaild.json'
     // var source_path = './data/source_16x16_invalid.json'
-    loadJson(source_path);
-</script>
-<script src="./js/row_validation.js"></script>
-<script src="./js/col_validation.js"></script>
-<script src="./js/box_validation.js"></script>
-<script src="./js/design.js"></script>
-<script src="./js/index.js"></script>
 
+    function testtest () {
+        var changedArray = [];
+        for (var i = 0; i < boxresult.length; i++) {
+            var validateMap = new Map();
+            var rowArray = [];
+            for (var j = 0; j < boxresult.length; j++) {
+                let value = document.getElementsByClassName(`${i}_${j}`)[0].value;
+                rowArray.push(value);
+            }
+            changedArray.push(rowArray);
+        }
+        console.log((changedArray));
+    }
+
+</script>
 </html>

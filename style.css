@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: white;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+}
+
+div{
+    width: 100%;
+}
+
+h1 {
+    height: 50px;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items:flex-end;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgb(13, 13, 97);
+}
+
+button, select {
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    border-radius: 5px;
+    border: 0.5px solid gray;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+select:hover {
+    border: 1px solid black;
+}
+
+.sel {
+    display: flex;
+    width: 600px;
+    justify-content: right;
+    column-gap: 1%;
+}
+
+.selbtn:hover {
+    background-color: rgb(94, 94, 99);
+    color: white;
+}
+
+.valbtn:hover {
+    background-color: rgb(0, 0, 255);
+    color: white;
+}
+
+.rebtn:hover {
+    background-color: rgb(115, 14, 39);
+    color: white;
+}
+
+.table, table {
+    display: flex;
+    flex-direction: column;
+    border-collapse: collapse;
+    width: fit-content;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.table {
+    border: 1px solid black;
+    min-width: 600px;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+}
+
+p {
+    padding: 1%;
+}
+
+.resultmessage {
+    margin-top: 50px;
+    width: 50%;
+    height: 80px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(38, 48, 48);
+    color: white;
+}
+
+tr {
+    width: fit-content;
+}
+
+input {
+    border: solid 0.1px rgb(132, 132, 132);
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+footer {
+    height: 100px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.basic {
+    background-color: rgb(234, 245, 250);
+    border: solid 0.5px rgb(49, 58, 227);
+}
+
+.red {
+    background-color: rgb(246, 136, 136);
+    color: white;
+}
