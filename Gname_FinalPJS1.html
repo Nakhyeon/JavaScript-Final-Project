@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script
-    src="https://code.jquery.com/jquery-3.6.1.min.js"
-    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-    crossorigin="anonymous">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous">
+        </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <title>Document</title>
     <script src="./js/box_validation.js"></script>
@@ -24,7 +23,7 @@
         <h1>
             javaScript Final-Project Sudoku
         </h1>
-        <br/>
+        <br />
         <div class="sel">
             <select name="" id="type">
                 <option value="source_4x4">Correct 4 X 4</option>
@@ -33,21 +32,20 @@
                 <option value="source_invalid">9 X 9</option>
                 <option value="source_16x16_invalid">16 X 16</option>
             </select>
-            <button type="button" class=
-            "selbtn" onclick="selectsudoku()">select</button>
+            <button type="button" class="selbtn" onclick="selectsudoku()">select</button>
         </div>
-        <br/>
+        <br />
         <div class="table">
             <table>
             </table>
         </div>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <div>
-            <button type="button" class=
-            "valbtn" onclick="validation()"><i class="fa-solid fa-power-off"></i>  Validate the Sudoku</button>
-            <button type="button" class=
-            "rebtn" onclick="resetval()"><i class="fa-solid fa-power-off"></i> Reset</button>
+            <button type="button" class="valbtn" onclick="validation()"><i class="fa-solid fa-power-off"></i> Validate
+                the Sudoku</button>
+            <button type="button" class="rebtn" onclick="resetval()"><i class="fa-solid fa-power-off"></i>
+                Reset</button>
             <button type="button" onclick="testtest()">GET</button>
         </div>
         <div class="resultmessage">
@@ -67,17 +65,17 @@
         tabled.parentNode.removeChild(tabled)
         const table = document.querySelector(".table");
         let tablemake = document.createElement("table")
-        if(size == 4){
+        if (size == 4) {
             for (let rowidx in values) {
                 let tr = document.createElement("tr");
                 for (let colIdx in values[rowidx]) {
                     let td = document.createElement("input");
                     td.value = values[rowidx][colIdx];
                     td.className = `sudoku ${rowidx}_${colIdx}`;
-                    if(
+                    if (
                         colIdx < "2" && rowidx < "2" ||
                         colIdx > "1" && rowidx > "1"
-                    ){
+                    ) {
                         td.classList.add('basic')
                     }
                     tr.appendChild(td);
@@ -85,20 +83,20 @@
                 tablemake.appendChild(tr);
                 table.appendChild(tablemake);
             }
-        }else if(size == 9){
+        } else if (size == 9) {
             for (let rowidx in values) {
                 let tr = document.createElement("tr");
                 for (let colIdx in values[rowidx]) {
                     let td = document.createElement("input");
                     td.value = values[rowidx][colIdx];
                     td.className = `sudoku ${rowidx}_${colIdx}`;
-                    if(
+                    if (
                         colIdx < "3" && rowidx < "3" ||
                         colIdx > "5" && rowidx > "5" ||
                         colIdx > "5" && rowidx < "3" ||
                         colIdx < "3" && rowidx > "5" ||
                         (rowidx > 2 && rowidx < 6 && colIdx > 2 && colIdx < 6)
-                    ){
+                    ) {
                         td.classList.add('basic')
                     }
                     tr.appendChild(td);
@@ -106,30 +104,30 @@
                 tablemake.appendChild(tr);
                 table.appendChild(tablemake);
             }
-        }else if(size == 16){
+        } else if (size == 16) {
             for (let rowidx in values) {
                 let tr = document.createElement("tr");
                 for (let colIdx in values[rowidx]) {
                     let td = document.createElement("input");
                     td.value = values[rowidx][colIdx];
                     td.className = `sudoku ${rowidx}_${colIdx}`;
-                    if(
-                        (colIdx == "0" || colIdx == "1" || colIdx == "2" || colIdx == "3") & (rowidx == "0" || rowidx == "1" || rowidx == "2" || rowidx == "3") 
+                    if (
+                        (colIdx == "0" || colIdx == "1" || colIdx == "2" || colIdx == "3") & (rowidx == "0" || rowidx == "1" || rowidx == "2" || rowidx == "3")
                         ||
-                        (colIdx == "8" || colIdx == "9" || colIdx == "10" || colIdx == "11") & (rowidx == "0" || rowidx == "1" || rowidx == "2" || rowidx == "3") 
+                        (colIdx == "8" || colIdx == "9" || colIdx == "10" || colIdx == "11") & (rowidx == "0" || rowidx == "1" || rowidx == "2" || rowidx == "3")
                         ||
-                        (colIdx == "4" || colIdx == "5" || colIdx == "6" || colIdx == "7") & (rowidx == "4" || rowidx == "5" || rowidx == "6" || rowidx == "7") 
+                        (colIdx == "4" || colIdx == "5" || colIdx == "6" || colIdx == "7") & (rowidx == "4" || rowidx == "5" || rowidx == "6" || rowidx == "7")
                         ||
                         (colIdx == "12" || colIdx == "13" || colIdx == "14" || colIdx == "15") & (rowidx == "4" || rowidx == "5" || rowidx == "6" || rowidx == "7")
                         ||
-                        (colIdx == "0" || colIdx == "1" || colIdx == "2" || colIdx == "3") & (rowidx == "8" || rowidx == "9" || rowidx == "10" || rowidx == "11") 
+                        (colIdx == "0" || colIdx == "1" || colIdx == "2" || colIdx == "3") & (rowidx == "8" || rowidx == "9" || rowidx == "10" || rowidx == "11")
                         ||
                         (colIdx == "8" || colIdx == "9" || colIdx == "10" || colIdx == "11") & (rowidx == "8" || rowidx == "9" || rowidx == "10" || rowidx == "11")
                         ||
-                        (colIdx == "4" || colIdx == "5" || colIdx == "6" || colIdx == "7") & (rowidx == "12" || rowidx == "13" || rowidx == "14" || rowidx == "15") 
+                        (colIdx == "4" || colIdx == "5" || colIdx == "6" || colIdx == "7") & (rowidx == "12" || rowidx == "13" || rowidx == "14" || rowidx == "15")
                         ||
-                        (colIdx == "12" || colIdx == "13" || colIdx == "14" || colIdx == "15") & (rowidx == "12" || rowidx == "13" || rowidx == "14" || rowidx == "15") 
-                    ){
+                        (colIdx == "12" || colIdx == "13" || colIdx == "14" || colIdx == "15") & (rowidx == "12" || rowidx == "13" || rowidx == "14" || rowidx == "15")
+                    ) {
                         td.classList.add('basic')
                     }
                     tr.appendChild(td);
@@ -138,7 +136,7 @@
                 table.appendChild(tablemake);
             }
         }
-        }
+    }
 
     let boxresult = {};
     let colresult = {};
@@ -153,17 +151,17 @@
             boxresult = boxValidation(size, values);
             tablePop(values, size, boxresult);
         }
-        
-        
+
+
         xmlHTTP.open("GET", source_path, true);
         xmlHTTP.send();
     }
 
-    function validation(){
+    function validation() {
         chageCh(boxresult);
     }
 
-    function resetval(){
+    function resetval() {
         $("input").removeClass("red");
         console.log($("input"));
         let message = document.getElementsByClassName("resultmessage")[0];
@@ -172,9 +170,9 @@
 
     console.log(boxresult);
 
-    
+
     let source_path;
-    function selectsudoku(){        
+    function selectsudoku() {
         let type = document.getElementById("type").value
         source_path = `./data/${type}.json`;
         console.log(source_path)
@@ -187,7 +185,7 @@
     // var source_path = './data/source_4x4_invaild.json'
     // var source_path = './data/source_16x16_invalid.json'
 
-    function testtest () {
+    function testtest() {
         var changedArray = [];
         for (var i = 0; i < boxresult.length; i++) {
             var validateMap = new Map();
@@ -202,4 +200,5 @@
     }
 
 </script>
+
 </html>
