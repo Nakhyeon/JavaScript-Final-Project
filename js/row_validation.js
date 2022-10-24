@@ -22,5 +22,6 @@ function rowValidation(size, values) {
         }
         return boolRow
     }
+    
     return output
 }
