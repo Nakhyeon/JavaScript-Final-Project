@@ -16,7 +16,9 @@ size: Int, value: Array[Array[Int]]
 ```
 #### output
 ```
-Array[Array[Int]]
+Array[Array[Boolean]]
+```
+```
 ```
 ```
 # sample of value
@@ -31,7 +33,7 @@ Array[Array[Int]]
 ### function of design
 #### input
 ```
-Array[Array[Int]]
+Array[Array[Boolean]]
 ```
 ```
 # sample of value
