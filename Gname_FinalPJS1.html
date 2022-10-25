@@ -14,7 +14,7 @@
     <script src="./js/row_validation.js"></script>
     <script src="./js/col_validation.js"></script>
     <script src="./js/design.js"></script>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
         <br />
         <div class="sel">
             <select name="" id="type" onchange="meChage()">
-                <option selected disabled>Choose your Sudoky</option>
+                <option selected disabled>Choose your Sudoku</option>
                 <option value="source_4x4">Correct 4 X 4</option>
                 <option value="source_4x4_invaild">4 X 4</option>
                 <option value="source">Correct 9 X 9</option>
@@ -37,9 +37,13 @@
         </div>
         <div class="selectMessage"></div>
         <div class="selectMessage2">
-            <p><span style="color:blue;">RULE 1.  </span><span style="color: red;">RED</span> text color means it's wrong in ONE way</p>
-            <p><span style="color:blue;">RULE 2.  </span><span style="color: red;">RED</span> text color with <span style="background-color: rgb(250, 180, 163);">PINK(?)</span> background means it's wrong in TWO ways</p>
-            <p><span style="color:blue;">RULE 3.  </span>WHITE text color with <span style="background-color: rgb(243, 67, 23);">RED</span> background color it's wrong in ALL ways</p>
+            <p><span style="color:blue;">RULE 1. </span><span style="color: red;">RED</span> text color means it's wrong
+                in ONE way</p>
+            <p><span style="color:blue;">RULE 2. </span><span style="color: red;">RED</span> text color with <span
+                    style="background-color: rgb(250, 180, 163);">PINK(?)</span> background means it's wrong in TWO ways
+            </p>
+            <p><span style="color:blue;">RULE 3. </span>WHITE text color with <span
+                    style="background-color: rgb(243, 67, 23);">RED</span> background color it's wrong in ALL ways</p>
         </div>
         <br />
         <div class="table">
@@ -55,8 +59,10 @@
         </div>
         <br />
         <div>
-            <button type="button" class="valbtn" onclick="validation()" disabled><i class="fa-solid fa-power-off"></i> Validate the Sudoku</button>
-            <button type="button" class="rebtn" onclick="resetval()" disabled><i class="fa-solid fa-power-off"></i>Reset</button>
+            <button type="button" class="valbtn" onclick="validation()" disabled><i class="fa-solid fa-power-off"></i>
+                Validate the Sudoku</button>
+            <button type="button" class="rebtn" onclick="resetval()" disabled><i
+                    class="fa-solid fa-power-off"></i>Reset</button>
         </div>
     </main>
     <footer>
@@ -64,7 +70,8 @@
             Tamwood Web development javaScript Fianl Project | Presented by Tyler, Yusuke, Taka, Nak
         </span>
         <div>
-            <a href="https://github.com/Nakhyeon/JavaScript-Final-Project"><i class="fa-brands fa-github"></i> Project GitHub</a>
+            <a href="https://github.com/Nakhyeon/JavaScript-Final-Project"><i class="fa-brands fa-github"></i> Project
+                GitHub</a>
         </div>
     </footer>
 </body>
@@ -149,9 +156,9 @@
     }
 
     function validation() {
-        chageCh(boxresult,rowresult, colresult);
-        $($(".rebtn")).attr("disabled",false);
-        $($(".valbtn")).attr("disabled",true);
+        chageCh(boxresult, rowresult, colresult);
+        $($(".rebtn")).attr("disabled", false);
+        $($(".valbtn")).attr("disabled", true);
         let selmessage = document.getElementsByClassName("selectMessage")[0];
         selmessage.innerText = "";
         console.log($("input"));
@@ -175,8 +182,8 @@
         console.log($("input"));
         let message = document.getElementsByClassName("resultmessage")[0];
         message.innerText = `Let's check if your Sudoku is right.`;
-        $($(".rebtn")).attr("disabled",true);
-        $($(".valbtn")).attr("disabled",false);
+        $($(".rebtn")).attr("disabled", true);
+        $($(".valbtn")).attr("disabled", false);
 
 
         //reset values
@@ -189,13 +196,13 @@
                 colrow.push(td);
             }
             colval.push(colrow);
-        colrow=[];
+            colrow = [];
         }
 
         values = colval;
         boxresult = boxValidation(size, values);
         rowresult = rowValidation(size, values);
-        colresult = colValidation(size,values);
+        colresult = colValidation(size, values);
         tablePop(values, size);
     }
 
@@ -204,7 +211,7 @@
     let source_path;
     function selectsudoku() {
         let type = document.getElementById("type").value
-        $($(".valbtn")[0]).attr("disabled",false);
+        $($(".valbtn")[0]).attr("disabled", false);
         source_path = `./data/${type}.json`;
         console.log(source_path);
         loadJson(source_path);
@@ -213,12 +220,12 @@
         $(".valbtn ").addClass("vhover");
     }
 
-    function meChage(){
+    function meChage() {
         let selmessage = document.getElementsByClassName("selectMessage")[0];
         selmessage.innerText = `Click SELECT!!`;
-        $($(".rebtn")[0]).attr("disabled",true);
-        $($(".valbtn")[0]).attr("disabled",true);
-        $($(".selbtn")[0]).attr("disabled",false);
+        $($(".rebtn")[0]).attr("disabled", true);
+        $($(".valbtn")[0]).attr("disabled", true);
+        $($(".selbtn")[0]).attr("disabled", false);
         $(".valbtn ").removeClass("vhover");
         $(".rebtn").removeClass("rhover");
     }
@@ -240,14 +247,14 @@
             boxresult = boxValidation(size, values);
             console.log("boxValidation output");
             console.log(boxresult);
-            
+
             //row validate
             rowresult = rowValidation(size, values);
             console.log("rowValidation output");
             console.log(rowresult);
 
             //column validate
-            colresult = colValidation(size,values);
+            colresult = colValidation(size, values);
             console.log("column output");
             console.log(colresult);
 
