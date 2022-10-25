@@ -27,12 +27,6 @@
         <div class="sel">
             <select name="" id="type" onchange="meChage()">
                 <option selected disabled>Choose your Sudoku</option>
-                <option value="source_4x4">Correct 4 X 4</option>
-                <option value="source_4x4_invaild">4 X 4</option>
-                <option value="source">Correct 9 X 9</option>
-                <option value="source_invalid">9 X 9</option>
-                <option value="source_16x16_invalid">16 X 16</option>
-                <option value="source_25x25_invalid">25 X 25</option>
             </select>
             <button type="button" class="selbtn" onclick="selectsudoku()" disabled>select</button>
         </div>
@@ -77,31 +71,47 @@
     </footer>
 </body>
 <script>
+    function renderSelectBox() {
+        // render select box options
+        const select = document.getElementById('type');
+        // Get files from the server folder
+        $.ajax({
+            url: './data/',
+            success: function (data) {
+                // Parse the data
+                $(data).find("a").attr("href", function (i, val) {
+                    if (val.match(/\.json$/)) {
+                        // Add optopm to select box without .json and /data/
+                        select.innerHTML += `<option value="${val}">${val.replace(
+                            /\/data\//, '').replace(/\.json$/, '')}</option>`;
+                    }
+                });
+            }
+        });
+    }
+    renderSelectBox();
+
     let size, values;
     let tablePop = (values, size) => {
         const tabled = document.querySelector("table");
         tabled.parentNode.removeChild(tabled)
         const table = document.querySelector(".table");
         let tablemake = document.createElement("table")
-
         for (let rowidx in values) {
             let tr = document.createElement("tr");
             for (let colIdx in values[rowidx]) {
                 let td = document.createElement("input");
                 td.value = values[rowidx][colIdx];
-
                 // add class to use it later
                 td.className = `sudoku ${rowidx}_${colIdx}`;
-
                 tr.appendChild(td);
                 tablemake.appendChild(tr);
                 table.appendChild(tablemake);
             }
         }
         //design.js --- set the basic tabe color by boxes
-        basicColor(size,values);
+        basicColor(size, values);
     }
-
 
     function validation() {
         //design.js --- chage background of element witch contain a wrong number
@@ -134,7 +144,6 @@
         $($(".rebtn")).attr("disabled", true);
         $($(".valbtn")).attr("disabled", false);
 
-
         //reset values
         let val = [];
         let row = [];
@@ -155,18 +164,23 @@
         tablePop(values, size);
     }
 
-
     //select sudoku fils
     let source_path;
     function selectsudoku() {
         let type = document.getElementById("type").value
         $($(".valbtn")[0]).attr("disabled", false);
-        source_path = `./data/${type}.json`;
-        console.log(source_path);
+        source_path = `${type}`;
+        // console.log(source_path);
+        console.log(`source_path: ${source_path}`);
         loadJson(source_path);
         let selmessage = document.getElementsByClassName("selectMessage")[0];
         selmessage.innerText = "";
         $(".valbtn ").addClass("vhover");
+        // reset messages
+        let message = document.getElementsByClassName("resultmessage")[0];
+        let message2 = document.getElementsByClassName("doit")[0];
+        message.innerText = `Let's check if your Sudoku is right.`;
+        message2.innerText = "";
     }
 
     function meChage() {
@@ -207,12 +221,20 @@
             console.log("column output");
             console.log(colresult);
 
-
             tablePop(values, size);
         }
         xmlHTTP.open("GET", source_path, true);
         xmlHTTP.send();
     }
+
+    // if input keydown, real time validation
+    $(document).on("keyup", "input", function () {
+        console.log("keyup");
+        if (this.value != "") {
+            resetval();
+            validation();
+        }
+    });
 
 </script>
 
