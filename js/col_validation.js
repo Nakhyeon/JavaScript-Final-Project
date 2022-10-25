@@ -1,15 +1,13 @@
+
 function colValidation(size,values) {
     let nums = [];
-
-    for(let j = 0; j < size; j++){
-        for(let i = 0; i < size; i++){
-            if(nums.includes(values[j][i])){
-                return true;
-            }else{
-                nums.push(values[j][i]);
-            }
-        }return false;
-
-    }
-    return colValidation(size,values);
-}
+    let array = [];
+    // let output = [];
+    for(let rowIdx = 0; rowIdx < size; rowIdx++){
+        for(let value = 0; value < size; value++){
+            array.push(values[value][rowIdx]);
+        }  
+        nums.push(array);
+        array = [];
+    }return nums;
+};
