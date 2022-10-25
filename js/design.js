@@ -88,6 +88,6 @@ let chageCh = (boxresult, rowresult, colresult) => {
         message2.innerText = "";
     } else {
         message.innerText = `You have ${boxcounter} Errors in boxs, ${rowcounter} in rows and ${colcounter} in columns`;
-        message2.innerText = "Correct the mistakes and press RESET to validate the Sudoku again.";
+        message2.innerText = "Correct the mistakes and validate the Sudoku again.";
     }
 }
