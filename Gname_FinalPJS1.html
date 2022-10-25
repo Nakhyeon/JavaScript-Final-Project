@@ -32,6 +32,7 @@
                 <option value="source">Correct 9 X 9</option>
                 <option value="source_invalid">9 X 9</option>
                 <option value="source_16x16_invalid">16 X 16</option>
+                <option value="source_25x25_invalid">25 X 25</option>
             </select>
             <button type="button" class="selbtn" onclick="selectsudoku()" disabled>select</button>
         </div>
@@ -82,80 +83,28 @@
         tabled.parentNode.removeChild(tabled)
         const table = document.querySelector(".table");
         let tablemake = document.createElement("table")
-        if (size == 4) {
-            for (let rowidx in values) {
-                let tr = document.createElement("tr");
-                for (let colIdx in values[rowidx]) {
-                    let td = document.createElement("input");
-                    td.value = values[rowidx][colIdx];
-                    td.className = `sudoku ${rowidx}_${colIdx}`;
-                    if (
-                        colIdx < "2" && rowidx < "2" ||
-                        colIdx > "1" && rowidx > "1"
-                    ) {
-                        td.classList.add('basic')
-                    }
-                    tr.appendChild(td);
-                }
-                tablemake.appendChild(tr);
-                table.appendChild(tablemake);
-            }
-        } else if (size == 9) {
-            for (let rowidx in values) {
-                let tr = document.createElement("tr");
-                for (let colIdx in values[rowidx]) {
-                    let td = document.createElement("input");
-                    td.value = values[rowidx][colIdx];
-                    td.className = `sudoku ${rowidx}_${colIdx}`;
-                    if (
-                        colIdx < "3" && rowidx < "3" ||
-                        colIdx > "5" && rowidx > "5" ||
-                        colIdx > "5" && rowidx < "3" ||
-                        colIdx < "3" && rowidx > "5" ||
-                        (rowidx > 2 && rowidx < 6 && colIdx > 2 && colIdx < 6)
-                    ) {
-                        td.classList.add('basic')
-                    }
-                    tr.appendChild(td);
-                }
-                tablemake.appendChild(tr);
-                table.appendChild(tablemake);
-            }
-        } else if (size == 16) {
-            for (let rowidx in values) {
-                let tr = document.createElement("tr");
-                for (let colIdx in values[rowidx]) {
-                    let td = document.createElement("input");
-                    td.value = values[rowidx][colIdx];
-                    td.className = `sudoku ${rowidx}_${colIdx}`;
-                    if (
-                        (colIdx == "0" || colIdx == "1" || colIdx == "2" || colIdx == "3") & (rowidx == "0" || rowidx == "1" || rowidx == "2" || rowidx == "3")
-                        ||
-                        (colIdx == "8" || colIdx == "9" || colIdx == "10" || colIdx == "11") & (rowidx == "0" || rowidx == "1" || rowidx == "2" || rowidx == "3")
-                        ||
-                        (colIdx == "4" || colIdx == "5" || colIdx == "6" || colIdx == "7") & (rowidx == "4" || rowidx == "5" || rowidx == "6" || rowidx == "7")
-                        ||
-                        (colIdx == "12" || colIdx == "13" || colIdx == "14" || colIdx == "15") & (rowidx == "4" || rowidx == "5" || rowidx == "6" || rowidx == "7")
-                        ||
-                        (colIdx == "0" || colIdx == "1" || colIdx == "2" || colIdx == "3") & (rowidx == "8" || rowidx == "9" || rowidx == "10" || rowidx == "11")
-                        ||
-                        (colIdx == "8" || colIdx == "9" || colIdx == "10" || colIdx == "11") & (rowidx == "8" || rowidx == "9" || rowidx == "10" || rowidx == "11")
-                        ||
-                        (colIdx == "4" || colIdx == "5" || colIdx == "6" || colIdx == "7") & (rowidx == "12" || rowidx == "13" || rowidx == "14" || rowidx == "15")
-                        ||
-                        (colIdx == "12" || colIdx == "13" || colIdx == "14" || colIdx == "15") & (rowidx == "12" || rowidx == "13" || rowidx == "14" || rowidx == "15")
-                    ) {
-                        td.classList.add('basic')
-                    }
-                    tr.appendChild(td);
-                }
+
+        for (let rowidx in values) {
+            let tr = document.createElement("tr");
+            for (let colIdx in values[rowidx]) {
+                let td = document.createElement("input");
+                td.value = values[rowidx][colIdx];
+
+                // add class to use it later
+                td.className = `sudoku ${rowidx}_${colIdx}`;
+
+                tr.appendChild(td);
                 tablemake.appendChild(tr);
                 table.appendChild(tablemake);
             }
         }
+        //design.js --- set the basic tabe color by boxes
+        basicColor(size,values);
     }
 
+
     function validation() {
+        //design.js --- chage background of element witch contain a wrong number
         chageCh(boxresult, rowresult, colresult);
         $($(".rebtn")).attr("disabled", false);
         $($(".valbtn")).attr("disabled", true);
@@ -187,19 +136,19 @@
 
 
         //reset values
-        let colval = [];
-        let colrow = [];
+        let val = [];
+        let row = [];
 
         for (let i = 0; i < values.length; i++) {
             for (let j = 0; j < values.length; j++) {
                 let td = parseInt(document.getElementsByClassName(`${i}_${j}`)[0].value);
-                colrow.push(td);
+                row.push(td);
             }
-            colval.push(colrow);
-            colrow = [];
+            val.push(row);
+            row = [];
         }
 
-        values = colval;
+        values = val;
         boxresult = boxValidation(size, values);
         rowresult = rowValidation(size, values);
         colresult = colValidation(size, values);
