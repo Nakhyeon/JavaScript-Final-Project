@@ -14,11 +14,14 @@
     <script src="./js/row_validation.js"></script>
     <script src="./js/col_validation.js"></script>
     <script src="./js/design.js"></script>
+    <!-- <script src="./js/index.js"></script> -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-    <p class="headtop">If you're smart, you'll solve Sudoku easily, right?</p>
+    <header>
+        <p class="headtop">If you're smart, you'll solve Sudoku easily, right?</p>
+    </header>
     <main>
         <h1>
             javaScript Final-Project Sudoku
@@ -56,8 +59,8 @@
         <div>
             <button type="button" class="valbtn" onclick="validation()" disabled><i class="fa-solid fa-power-off"></i>
                 Validate the Sudoku</button>
-            <button type="button" class="rebtn" onclick="resetval()" disabled><i
-                    class="fa-solid fa-power-off"></i>Reset</button>
+            <!-- <button type="button" class="rebtn" onclick="resetval()" disabled><i
+                    class="fa-solid fa-power-off"></i>Reset</button> -->
         </div>
     </main>
     <footer>
@@ -229,13 +232,31 @@
 
     // if input keydown, real time validation
     $(document).on("keyup", "input", function () {
-        console.log("keyup");
         if (this.value != "") {
-            resetval();
-            validation();
+            if (this.value < 1 || this.value > size) {
+                this.value = "";
+                tmpAlert("Please enter a number between 1 and " + size, 2000);
+            } else {
+                resetval();
+                validation();
+            }
         }
     });
 
+    function tmpAlert(msg, duration) {
+        var div = document.createElement("div");
+        var p = document.createElement("p");
+        var divStyle = "display:flex;justify-content:center;position:fixed;top:50%;width:100%;padding:2%;border-radius:10px;";
+        var pStyle = "text-align:center;background-color:rgba(0,0,0,0.5);color:white;font-size:20px;";
+        div.setAttribute("style", divStyle);
+        p.setAttribute("style", pStyle);
+        p.innerHTML = msg;
+        div.appendChild(p);
+        setTimeout(function () {
+            div.parentNode.removeChild(div);
+        }, duration);
+        document.body.appendChild(div);
+    }
 </script>
 
 </html>

@@ -84,7 +84,7 @@ let chageCh = (boxresult, rowresult, colresult) => {
     let totalError = parseInt(boxcounter) + parseInt(rowcounter) + parseInt(colcounter);
 
     if (totalError == 0) {
-        message.innerText = "Your Sudoku is PERPECT!!"
+        message.innerText = "Your Sudoku is PERFECT!!"
         message2.innerText = "";
     } else {
         message.innerText = `You have ${boxcounter} Errors in boxs, ${rowcounter} in rows and ${colcounter} in columns`;
