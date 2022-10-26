@@ -151,6 +151,16 @@ function tmpAlert(msg, duration) {
     document.body.appendChild(div);
 }
 
+// input validation
+$(document).on("keypress", "input", function (event) {
+    // only number and backspace
+    if (event.keyCode != 8 && (event.keyCode < 48 || event.keyCode > 57)) {
+        console.log(event.keyCode);
+        event.preventDefault();
+        return;
+    }
+});
+
 // if input keydown, real time validation
 $(document).on("keyup", "input", function () {
     if (this.value != "") {
