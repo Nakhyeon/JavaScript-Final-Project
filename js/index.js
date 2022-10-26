@@ -74,6 +74,8 @@ let tablePop = (values, size) => {
 let boxresult = {};
 let rowresult = {};
 let colresult = {};
+
+
 // call validation function 
 function validation() {
     boxresult = boxValidation(size, values);

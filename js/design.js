@@ -19,8 +19,6 @@ let basicColor = (size, values) => {
         }
         w++;
     }
-    // console.log(length);
-    // console.log(length2);
 
     let length3 = [];
     for (let o = 0; o < Size / 2; o++) {
@@ -31,7 +29,6 @@ let basicColor = (size, values) => {
             length3.push(length2)
         }
     }
-    // console.log(length3);
 
     for (let i = 0; i < values.length; i++) {
         for (let j = 0; j < values.length; j++) {

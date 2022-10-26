@@ -17,6 +17,16 @@ header {
     background-color: rgb(108, 108, 119);
 }
 
+aside {
+    background-image: url('../img/Logo.jpeg');
+    background-position: center;
+    background-size: 80px;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    width: 70px;
+    height: 70px;
+}
+
 main {
     /* height: 100vh; */
     padding: 0% 2% 3% 2%;
@@ -107,6 +117,13 @@ span {
 
 input {
     width: 25px;
+}
+
+.maintop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .headtop {
