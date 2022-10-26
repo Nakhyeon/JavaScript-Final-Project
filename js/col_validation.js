@@ -1,6 +1,7 @@
 function colValidation(size, values) {
     let array = [];
     let row = [];
+    let validateArray = [];
     let output = [];
 
     // Convert the columns into rows
@@ -11,25 +12,23 @@ function colValidation(size, values) {
         array.push(row);
         row = [];
     }
-    
+
     // Convert the array to Col
-    function arrayToCol(array){
-        var arrayCol =[];
-        for (let rowIdx = 0; rowIdx < array.length; rowIdx++){
-            for (let value = 0; value < array.length; value++){
-                row.push(values[value][rowIdx]);
+    function arrayToCol(array) {
+        let arrayCol = [];
+        for (let rowIdx = 0; rowIdx < array.length; rowIdx++) {
+            for (let value = 0; value < array.length; value++) {
+                row.push(array[value][rowIdx]);
             }
             arrayCol.push(row);
             row = [];
-        }return arrayCol;
-    }arrayToCol(array);
-    
-    
+        }
+        return arrayCol;
+    }
+
     // Check for duplicates
-    array = rowValidation(size, array);
     function rowValidation(size, values) {
         let output = [];
-        
         for (var rowIdx = 0; rowIdx < size; rowIdx++) {
             let validRow = [];
             let row = values[rowIdx];
@@ -40,7 +39,7 @@ function colValidation(size, values) {
             validRow = findDuplicateNumber(row, boolRow);
             output.push(validRow);
         }
-        
+
         function findDuplicateNumber(row, boolRow) {
             for (firstIdx = 0; firstIdx < row.length; firstIdx++) {
                 for (secondIdx = 0; secondIdx < row.length; secondIdx++) {
@@ -51,12 +50,10 @@ function colValidation(size, values) {
             }
             return boolRow
         }
-
-
         return output
     }
 
-    output = array;
-
+    validateArray = rowValidation(size, array);
+    output = arrayToCol(validateArray);
     return output;
 }

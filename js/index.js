@@ -36,10 +36,7 @@ function selectsudoku() {
     msgDoit.innerText = "";
 }
 
-// table pop and the validate the sudoku & get the results in each variables.
-let boxresult = {};
-let rowresult = {};
-let colresult = {};
+// table pop
 let loadJson = (source_path) => {
     const xmlHTTP = new XMLHttpRequest();
     xmlHTTP.onload = function () {
@@ -47,18 +44,6 @@ let loadJson = (source_path) => {
         // console.log(output);
         size = output.size;
         values = output.values;
-        //box validate
-        boxresult = boxValidation(size, values);
-        // console.log("boxValidation output");
-        // console.log(boxresult);
-        //row validate
-        rowresult = rowValidation(size, values);
-        // console.log("rowValidation output");
-        // console.log(rowresult);
-        //column validate
-        colresult = colValidation(size, values);
-        // console.log("column output");
-        // console.log(colresult);
         tablePop(values, size);
     }
     xmlHTTP.open("GET", source_path, true);
@@ -86,9 +71,16 @@ let tablePop = (values, size) => {
     //design.js --- set the basic tabe color by boxes
     basicColor(size, values);
 }
-
+let boxresult = {};
+let rowresult = {};
+let colresult = {};
 // call validation function 
 function validation() {
+    boxresult = boxValidation(size, values);
+    //row validate
+    rowresult = rowValidation(size, values);
+    //column validate
+    colresult = colValidation(size, values);
     //design.js --- chage background of element witch contain a wrong number
     chageCh(boxresult, rowresult, colresult);
     $($(".valbtn")).attr("disabled", true);
