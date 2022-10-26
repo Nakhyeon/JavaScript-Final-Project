@@ -11,14 +11,21 @@ body {
     background-color: white;
 }
 
+header {
+    width: 100%;
+    height: fit-content;
+    background-color: rgb(108, 108, 119);
+}
+
 main {
-    padding-left: 2%;
-    padding-right: 2%;
+    /* height: 100vh; */
+    padding: 0% 2% 3% 2%;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1vh;
     text-align: center;
-    padding-bottom: 3%;
 }
 
 div {
@@ -98,10 +105,12 @@ span {
     border-radius: 5px;
 }
 
+input {
+    width: 25px;
+}
+
 .headtop {
-    width: 100%;
-    height: 20px;
-    background-color: rgb(108, 108, 119);
+    padding: 1% 0;
     text-align: center;
     color: white;
 }
@@ -161,7 +170,7 @@ table {
     column-gap: 1%;
 }
 
-.selectMessage2 {
+.rules {
     width: 70%;
     height: fit-content;
     font-size: 14px;
@@ -173,7 +182,6 @@ table {
 }
 
 .resultmessage {
-    margin-top: 20px;
     width: 70%;
     height: 80px;
     border-radius: 10px;
