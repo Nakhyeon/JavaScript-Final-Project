@@ -41,10 +41,6 @@ function colValidation(size, values) {
             output.push(validRow);
         }
         
-        
-        
-        
-
         function findDuplicateNumber(row, boolRow) {
             for (firstIdx = 0; firstIdx < row.length; firstIdx++) {
                 for (secondIdx = 0; secondIdx < row.length; secondIdx++) {
@@ -64,4 +60,3 @@ function colValidation(size, values) {
 
     return output;
 }
-
