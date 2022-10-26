@@ -19,8 +19,6 @@ size: Int, value: Array[Array[Int]]
 Array[Array[Boolean]]
 ```
 ```
-```
-```
 # sample of value
 
 [
