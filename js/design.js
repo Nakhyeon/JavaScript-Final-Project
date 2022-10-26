@@ -19,9 +19,8 @@ let basicColor = (size, values) => {
         }
         w++;
     }
-
-    console.log(length);
-    console.log(length2);
+    // console.log(length);
+    // console.log(length2);
 
     let length3 = [];
     for (let o = 0; o < Size / 2; o++) {
@@ -32,8 +31,7 @@ let basicColor = (size, values) => {
             length3.push(length2)
         }
     }
-
-    console.log(length3);
+    // console.log(length3);
 
     for (let i = 0; i < values.length; i++) {
         for (let j = 0; j < values.length; j++) {
@@ -48,7 +46,7 @@ let basicColor = (size, values) => {
 //chage background of element witch contain a wrong number
 let chageCh = (boxresult, rowresult, colresult) => {
     let message = document.getElementsByClassName("resultmessage")[0];
-    let message2 = document.getElementsByClassName("doit")[0];
+    let msgDoit = document.getElementsByClassName("doit")[0];
 
     function check(result, addClass) {
         for (let i = 0; i < result.length; i++) {
@@ -85,9 +83,9 @@ let chageCh = (boxresult, rowresult, colresult) => {
 
     if (totalError == 0) {
         message.innerText = "Your Sudoku is PERFECT!!"
-        message2.innerText = "";
+        msgDoit.innerText = "";
     } else {
         message.innerText = `You have ${boxcounter} Errors in boxs, ${rowcounter} in rows and ${colcounter} in columns`;
-        message2.innerText = "Correct the mistakes and validate the Sudoku again.";
+        msgDoit.innerText = "Correct the mistakes and validate the Sudoku again.";
     }
 }
