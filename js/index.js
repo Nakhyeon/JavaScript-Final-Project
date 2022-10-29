@@ -28,7 +28,7 @@ function renderSelectBox() {
         ];
         for (let i = 0; i < filelist.length; i++) {
             select.innerHTML += `<option value="${filelist[i]}">${filelist[i].replace(
-                /\/data\//, '').replace(/\.json$/, '')}</option>`;
+                /.\/data\//, '').replace(/\.json$/, '')}</option>`;
         }
     });
 }
