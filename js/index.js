@@ -14,23 +14,22 @@ function renderSelectBox() {
                 }
             });
         }
-        // If error
+        // if error
     }).fail(function () {
-        console.log("Can't get files from the data folder");
-        $.ajax({
-            url: 'https://nakhyeon.github.io/JavaScript-Final-Project/data/',
-            success: function (data) {
-                $(data).find("a").attr("href", function (i, val) {
-                    if (val.match(/\.json$/)) {
-                        select.innerHTML += `<option value="${val}">${val.replace(
-                            /\/data\//, '').replace(/\.json$/, '')}</option>`;
-                    }
-                });
-            }
-            // If error
-        }).fail(function () {
-            console.log("Can't get files from the server");
-        });
+        console.log("can't load files from server");
+        filelist = [
+            "./data/4x4_correct.json",
+            "./data/4x4_incorrect.json",
+            "./data/9x9_correct.json",
+            "./data/9x9_incorrect.json",
+            "./data/16x16_incorrect.json",
+            "./data/25x25_incorrect.json",
+            "./data/36x36_incorrect.json",
+        ];
+        for (let i = 0; i < filelist.length; i++) {
+            select.innerHTML += `<option value="${filelist[i]}">${filelist[i].replace(
+                /\/data\//, '').replace(/\.json$/, '')}</option>`;
+        }
     });
 }
 renderSelectBox();
